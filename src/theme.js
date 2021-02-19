@@ -14,7 +14,10 @@ const checkSavedTheme = () => {
   if (localStorage.getItem('theme') === 'dark') {
     refs.checkBox.setAttribute('checked', 'true');
     refs.body.classList.add(Theme.DARK);
+    return;
   }
+  refs.body.classList.add(Theme.LIGHT);
+  localStorage.setItem('theme', 'light');
 };
 checkSavedTheme();
 
@@ -22,11 +25,11 @@ refs.checkBox.addEventListener('change', () => {
   if (refs.body.classList.contains(Theme.DARK)) {
     refs.body.classList.remove(Theme.DARK);
     refs.body.classList.add(Theme.LIGHT);
-    localStorage.removeItem('theme');
+    localStorage.setItem('theme', 'light');
     return;
   }
-  refs.body.classList.add(Theme.DARK);
-  localStorage.setItem('theme', 'dark');
   if (refs.body.classList.contains(Theme.LIGHT))
     refs.body.classList.remove(Theme.LIGHT);
+    refs.body.classList.add(Theme.DARK);
+  localStorage.setItem('theme', 'dark');
 });
